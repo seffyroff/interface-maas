@@ -1,0 +1,4 @@
+name: maas
+summary: MAAS interface for region<->rack comms
+version: 1
+repo: https://github.com/jamesbeedy/interface-maas
