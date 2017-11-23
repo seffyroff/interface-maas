@@ -43,7 +43,7 @@ class MAASRequires(Endpoint):
             for unit in relation.units:
                 secret = unit.received_raw['secret']
                 maas_url = unit.received_raw['maas_url']
-                if maas_url and secrets:
+                if maas_url and secret:
                     service['hosts'].append({
                         'secret': secret,
                         'maas_url': maas_url,
