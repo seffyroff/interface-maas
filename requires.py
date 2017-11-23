@@ -7,7 +7,7 @@ class MAASRequires(Endpoint):
 
     @when('endpoint.{endpoint_name}.changed')
     def changed(self):
-        if any(unit.received['port'] for unit in self.all_units):
+        if any(unit.received['secret'] for unit in self.all_units):
             set_flag(self.flag('{endpoint_name}.available'))
 
     @when_not('endpoint.{endpoint_name}.joined')
@@ -41,11 +41,11 @@ class MAASRequires(Endpoint):
                 'hosts': [],
             })
             for unit in relation.units:
-                secrets = unit.received_raw['secrets']
+                secret = unit.received_raw['secret']
                 maas_url = unit.received_raw['maas_url']
                 if maas_url and secrets:
                     service['hosts'].append({
-                        'secrets': secrets,
+                        'secret': secret,
                         'maas_url': maas_url,
                     })
         return [s for s in services.values() if s['hosts']]
